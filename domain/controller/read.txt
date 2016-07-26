@@ -1,0 +1,17 @@
+#请求映射
+1、Http请求发送到核心过滤器
+登录验证以及权限管理，请求路径过滤。
+2、其他过滤器
+例如，字符集编码的设置等应用配置。
+3、核心控制器
+每个应用对应一个controller.xml配置文件，包括请求映射（含事件）、试图映射，以及Event Handler和Result Handler。
+根据应用名称，核心过滤器加载一个应用配置信息后将其存放在一个ControllerConfig的数据结构中，或者从缓存中获取。
+此外，还可以对请求进行一些预处理和后处理。
+4、Request Handler
+对请求的处理逻辑，包含ControllerConfig的引用，解析URL并根据请求映射配置。如果有事件需要响应，触发事件并将根据事件的处理结果
+来决将请求转交给核心控制器、当前Request Handler还是Result Handler。
+5、Error Handler
+对于处理过程中发生的任何错误，交给Error Handler统一处理并反馈到客户端。
+6、Result Handler
+根据事件处理结果，或者默认的配置，将请求交由Result Handler进行处理，包括图片（文件流）、HTML页面、纯文本、JSON字符串、无返回等。
+Result Handler对请求进行处理后，将结果返回给浏览器。
