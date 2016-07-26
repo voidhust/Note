@@ -1,0 +1,29 @@
+##领域模型
+#接口层（Interface）
+该层包含与其他系统进行交互的接口和通信设施。
+负责解析、验证和翻译请求数据，同时负责序列化回传的数据到客户端，例如HTML、JSON或XML.
+Facade
+解析验证Http请求参数，负责与浏览器的一切交互。
+DTO
+数据传输对象，用JsonObject担当。
+Converter
+实现DTO与实体对象之间的转换。不同的通信方式实现不同的转换器。
+#应用层（Application）
+Application Service
+负责控制逻辑，即协调并委派业务逻辑给领域层对象进行处理。
+该层特别适合进行事务控制、日志记录和安全管理。
+#领域层（Domain）
+(实体)Entity
+我们利用Hibernate的实体概念。
+（值对象）
+与实体的区别，没有唯一标识
+（聚集）Aggregate
+一组不可分割的实体集合，一个聚集包含一个聚集根（根实体）
+（工厂）Factory
+负责实体的创建
+（Repository）资源库
+负责实体的更新
+#基础层（Infrastructure）
+为接口层、应用层、领域层三层提供支撑。
+所有与具体平台、框架相关的实现会在Infrastructure中提供，避免污染领域模型。
+例如，数据库引擎（我们采用Hibernate SessionFactory），应用服务（Email）等。
